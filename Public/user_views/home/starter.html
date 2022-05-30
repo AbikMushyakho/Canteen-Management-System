@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canteen</title>
+  <link rel="icon" type="image/x-icon" href="/images/canteenfav.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+  <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/user_views/home/style.css">
+
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <div class="headers">
+      <div id="header"></div>
+      <div id="aside"></div>
+    </div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <h1 class="text-center text-uppercase">DASHBOARD</h1>
+          <br>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- row -->
+          <div class="row card-group" id="homePage">
+            <!-- total carts -->
+            <div class="col-sm-4">
+              <div class="card small-box bg-primary elevation-4">
+
+                <div class="inner text-center">
+                  <p class=" fs-4 fw-bold ">Total Orders</p>
+                  <h3 class=" total_orders fs-1 text-warning">
+                    0</h3>
+                </div>
+                <a href="/orders" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card small-box bg-secondary elevation-4">
+                <div class="inner text-center">
+                  <p class="fs-4 fw-bold text-light text-bold ">Credit Amount</p>
+                  <span class="credit_amount fs-1 text-warning">0</span>
+                </div>
+
+                <a href="/user/credits" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card small-box bg-success elevation-4">
+                <div class="inner text-center">
+                  <p class="fs-4 fw-bold text-light text-bold ">Total Payments</p>
+                  <span class="payments fs-1  text-warning">0</span>
+                </div>
+
+                <a href="/user/payments" class="small-box-footer ">More info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+
+            <!-- latest order table and new food item table -->
+
+
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- <img src="/uploads/" alt="" srcset=""> -->
+
+    <!-- Main Footer -->
+    <div id="footer"></div>
+  </div>
+  <!-- ./wrapper -->
+  <!-- REQUIRED SCRIPTS -->
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!-- jQuery -->
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/dist/js/adminlte.min.js"></script>
+  <script src="/user_js/home/starter.js"></script>
+
+</body>
+
+</html>

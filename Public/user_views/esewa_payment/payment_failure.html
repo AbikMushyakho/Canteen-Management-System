@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payment Failed</title>
+    <link rel="icon" type="image/x-icon" href="/images/canteenfav.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/user_views/home/style.css">
+
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper ml-2" style="margin-top:50px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <h1 class="text-center text-uppercase">Transaction Details</h1>
+                    <br>
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid position-relative">
+                    <!-- row -->
+                    <div class="row ml-4 justify-content-center" id="homePage">
+
+                        <div class="col-md-8">
+
+                            <!-- Profile Image -->
+                            <div class="card card-primary card-outline ">
+                                <div class="card-body box-profile">
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Status</b>
+                                            <p class=" badge badge-success float-right">Failed</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Reference Code</b>
+                                            <p class="float-right refId">0</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Product Id</b>
+                                            <p class="float-right oid">0</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Amount</b>
+                                            <p class="float-right amount">0</p>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="nav nav-pills float-right">
+                                        <a href="/home" class="btn btn-primary ">Back to homepage</a>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content -->
+            </section>
+
+
+
+        </div>
+        <!-- ./wrapper -->
+        <!-- REQUIRED SCRIPTS -->
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <!-- jQuery -->
+        <script src="/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/dist/js/adminlte.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/canteenfav.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Google Font: Source Sans Pro -->
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <title>Add New User</title>
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+        <header id="header">
+        </header>
+        <aside id="aside"></aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Assign Role</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Assign Role</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8" id="data">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">User and Roles</h3>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Select User</label>
+                                        <div class="select2-purple">
+                                            <!-- <select class="select2" multiple="multiple" data-placeholder="Select a user"
+                                            data-dropdown-css-class="select2-purple" style="width: 100%;"> -->
+                                            <select class="users select2" data-placeholder="Select a user"
+                                                data-dropdown-css-class="select2-purple" style="width: 50%;">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Select Role</label>
+                                        <div class="select2-purple">
+                                            <!-- <select class="select2" multiple="multiple" data-placeholder="Select a user"
+                                            data-dropdown-css-class="select2-purple" style="width: 100%;"> -->
+                                            <select class="select2 roles" data-placeholder="Select a role"
+                                                data-dropdown-css-class="select2-purple" style="width: 50%;">
+                                                <!-- <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Staff</option>
+                                                <option>Guest</option> -->
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- /.form-group -->
+                                </div>
+                                <div class="card-footer">
+                                    <a id="assignRole" class="btn btn-info float-right mr-2">Add</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script> -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+
+    <!-- sweetAlert -->
+    <script src="/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+
+    <script src="/dist/js/adminlte.min.js"></script>
+
+    <script src="/js/user/assignRole.js"></script>
+    <script src="/plugins/select2/js/select2.full.min.js"></script>
+
+
+    <script>
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+    </script>
+</body>
+
+</html>

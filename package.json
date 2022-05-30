@@ -1,0 +1,48 @@
+{
+    "name": "final-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.20.0",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "file-system": "^1.2.2",
+        "fs": "^0.0.1-security",
+        "glob": "^8.0.1",
+        "http": "^0.0.1-security",
+        "joi": "^17.6.0",
+        "jquery": "^3.6.0",
+        "jsonwebtoken": "^8.5.1",
+        "jwt-decode": "^3.1.2",
+        "multer": "^1.4.4",
+        "nodemailer": "^6.7.3",
+        "nodemon": "^2.0.15",
+        "passport": "^0.5.2",
+        "passport-jwt": "^4.0.0",
+        "path": "^0.12.7",
+        "pg": "^8.7.3",
+        "postgres": "^3.0.5",
+        "referral-code-generator": "^1.0.8",
+        "sequelize": "^6.19.0",
+        "sequelize-cli": "^6.4.1",
+        "shortid": "^2.2.16",
+        "socket.io": "^4.4.1",
+        "socket.io-client": "^4.4.1",
+        "sweetalert2": "^11.4.8"
+    },
+    "engines": {
+        "node": "17.7.2",
+        "npm": "8.5.2"
+    }
+}

@@ -1,0 +1,221 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-warning">
+    <!-- Brand Logo -->
+    <a href=" /home" class="brand-link">
+        <ion-icon class="nav-icon" name="fast-food-outline"></ion-icon>
+        <span class="brand-text font-weight-light">Canteen Management </span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image ">
+                <img id="user_image" src="/images/men.png" class="img-circle elevation-2 border border-warning "
+                    alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block mb-2" id="name"></a>
+                <a href="#" class=" btn btn-sm btn-primary  rounded logout ">Logout</a>
+            </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+                <li class="nav-item ">
+                    <a href="/users/starter" class="nav-link active">
+                        <ion-icon class="nav-icon" name="apps-outline"></ion-icon>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="/home" class="nav-link ">
+                        <ion-icon class="nav-icon" name="fast-food-outline"></ion-icon>
+
+                        <p>
+                            Categories
+                            <!-- <i class="right fas fa-angle-left"></i> -->
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item ">
+                    <a href="/profile" class="nav-link">
+                        <ion-icon class="nav-icon " name="person-outline"></ion-icon>
+                        <p>
+                            My Profile
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="/orders" class="nav-link ">
+                        <ion-icon class="nav-icon " name="bag-add-outline"></ion-icon>
+                        <p>
+                            My Orders
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/user/payments" class="nav-link ">
+                        <ion-icon class="nav-icon" name="cash-outline"></ion-icon>
+
+                        <p>
+                            My Payments
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="/user/credits" class="nav-link ">
+                        <ion-icon class="nav-icon" name="wallet-outline"></ion-icon>
+                        <p>
+                            My Credits
+                        </p>
+                    </a>
+
+                </li>
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+    var user_id = localStorage.getItem("user_id");
+    var full_name = localStorage.getItem("full_name");
+    var role_name = localStorage.getItem("role_name");
+    if (!user_id || !full_name || !role_name) {
+        Logout();
+    }
+
+    $(".logout").click(function () {
+        Logout()
+    })
+    CheckUser();
+
+    function CheckUser() {
+        $.ajax({
+            url: '/user/read',
+            type: 'GET',
+            success: function (response) {
+                if (response.status) {
+                    if (response.data.role_name !== "User" | "Guest") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: "Unauthorized Access",
+                            text: "Must be a user to access this page",
+                            showConfirmButton: true,
+                            confirmButtonText: 'Login'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/login'
+                            }
+                        })
+                    }
+                    else {
+                        $("#name").html(full_name)
+                        if (response.data.gender == "Male") {
+                            $("#user_image").attr({ "src": "/images/men.png" });
+
+                        } else {
+                            $("#user_image").attr({ "src": "/images/women.png" });
+                        }
+                    }
+                } else if (!response.status) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'MESSAGE',
+                        text: `${response.message}`,
+                        showConfirmButton: true,
+                        confirmButtonText: "Login"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/login'
+                        }
+                    })
+
+                }
+            },
+            error: function (response) {
+
+                return Swal.fire('Server error', "Server not started", 'error');
+            }
+        });
+
+    }
+    function Logout() {
+        $.ajax({
+            url: '/logout',
+            type: 'GET',
+
+            success: function (response) {
+                if (response.status) {
+                    Toast.fire({
+                        icon: 'success',
+                        animation: true,
+                        title: `${response.message}`
+                    })
+                    localStorage.clear();
+                    setInterval(() => {
+                        window.location.href = "/home"
+                    }, 2000);
+                }
+                else if (!response.status) {
+
+                    Swal.fire(
+                        {
+                            title: 'Error',
+                            text: response.message,
+                            icon: 'error',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Login'
+
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/href';
+                            }
+                        });
+                }
+            },
+            error: function (response) {
+                return Swal.fire('Server error', "Server not started", 'error');
+            }
+        });
+
+
+    }
+</script>
