@@ -6,8 +6,10 @@ var socket;
 var html = ''
 var time = 0
 var orderNotifications = []
-const socketUrl = 'https://canteen-management-system-abik.herokuapp.com/';
+// const socketUrl = 'https://canteen-management-system-abik.herokuapp.com/';
 // const socketUrl = 'http://localhost:5000/';
+const socketUrl="https://canteen.abik.com.np/";
+
 
 socket = io(socketUrl, {
     reconnection: true,

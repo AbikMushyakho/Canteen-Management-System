@@ -3,7 +3,8 @@ $(document).ready(() => {
     // $("#messages").hide();
 })
 var socket;
-const socketUrl = 'https://canteen-management-system-abik.herokuapp.com/';
+// const socketUrl = 'https://canteen-management-system-abik.herokuapp.com/';
+const socketUrl="https://canteen.abik.com.np/";
 // const socketUrl = 'http://localhost:5000/';
 
 socket = io(socketUrl, {

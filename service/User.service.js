@@ -12,7 +12,8 @@ class UserService {
   //register user
   register = async (payload) => {
     const find = await UserRepo.findByEmail(payload.email);
-    if (find) throw new Error(`User with email ${payload.email} already exists`)
+    if (find)
+      throw new Error(`User with email ${payload.email} already exists`);
     //hashing password
     const email = payload.email;
     const password = payload.password;
@@ -20,36 +21,34 @@ class UserService {
     const hashPassword = bcrypt.hashSync(password, salt);
     payload.password = hashPassword;
     const saved = await UserRepo.register(payload);
-    if (!saved) throw new Error("Unable to register at this time!!!")
+    if (!saved) throw new Error("Unable to register at this time!!!");
     //if available auto assign role as user
     const data = {
       user_id: saved.id,
       role_id: 2,
     };
     await UserRoleRepo.addUserRole(data);
-    let URL = `https://canteen-management-system-abik.herokuapp.com/verifyEmail?email=${email}`
+    let URL = `${process.env.DEPLOY_URL}/verifyEmail?email=${email}`;
     let seMail = await this.SENDMAIL(email, URL);
     if (seMail) {
       return true;
     } else {
       return false;
     }
-
   };
   SENDMAIL = async (email, URL) => {
     var mailer = {
       pool: true,
-      host: 'smtp.gmail.com',
+      host: "smtp.gmail.com",
       port: 465,
       auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD,
       },
       secure: true,
-
-    }
+    };
     let transporter = nodemailer.createTransport(mailer);
-    console.log('SMTP Configured');
+    console.log("SMTP Configured");
     const messages = {
       from: process.env.EMAIL, // sender address
       // to: email,
@@ -66,68 +65,78 @@ class UserService {
         console.log("Server is ready to take our messages");
       }
     });
-    console.log('Sending Mail');
+    console.log("Sending Mail");
     const info = await transporter.sendMail(messages);
     if (info) {
-      console.log("message send success")
-      return true
+      console.log("message send success");
+      return true;
     }
     return false;
-  }
+  };
   // Verify registered email
   verify_Registered_Email = async (email) => {
     const find = await UserRepo.findByEmail(email);
     if (!find) throw new Error("User with this email not found");
     const data = {
-      verified: true
-    }
+      verified: true,
+    };
     const updateToVerified = await UserRepo.updateByEmail(data, email);
     if (!updateToVerified) throw new Error("User not updated to verified");
     return true;
-  }
+  };
   //login user by checking password
   login = async (payload) => {
     const _user = await UserRepo.login(payload);
-    if (!_user) throw new Error("Not Registered Yet?, Or your email is invalid!!")
-    if (!_user.verified) throw new Error("Email not verified!!!. Please check your registered email to get verified");
+    if (!_user)
+      throw new Error("Not Registered Yet?, Or your email is invalid!!");
+    if (!_user.verified)
+      throw new Error(
+        "Email not verified!!!. Please check your registered email to get verified"
+      );
     const _Role = await RoleRepository.findById(_user.user_role.role_id);
-    if (!_Role) throw new Error("Sorry, No roles are assigned for you!!")
+    if (!_Role) throw new Error("Sorry, No roles are assigned for you!!");
     if (_user && _user.email === payload.email) {
       const pwMatch = bcrypt.compareSync(payload.password, _user.password);
-      if (!pwMatch) throw new Error("Invalid Password")
+      if (!pwMatch) throw new Error("Invalid Password");
       const generate = {
         id: _user.id,
         full_name: _user.full_name,
         email: _user.email,
         role_id: _Role.id,
-        role_name: _Role.role_name
-      }
+        role_name: _Role.role_name,
+      };
       const token = generateUserToken(generate);
       return { generate, token };
     } else {
-      throw new Error("Email not matched")
+      throw new Error("Email not matched");
     }
   };
   changePassword = async (user_id, payload) => {
     const _user = await UserRepo.findById(user_id);
-    if (!_user) throw new Error("No Such User")
+    if (!_user) throw new Error("No Such User");
     const email = _user.email;
     const User = await UserRepo.findByEmail(email);
-    const check_password = bcrypt.compareSync(payload.old_password, User.password);
+    const check_password = bcrypt.compareSync(
+      payload.old_password,
+      User.password
+    );
     if (!check_password) throw new Error("Old password not matched");
     if (check_password) {
-      const compare_new = bcrypt.compareSync(payload.new_password, User.password);
-      if (compare_new) throw new Error("Password already used, so choose new one");
+      const compare_new = bcrypt.compareSync(
+        payload.new_password,
+        User.password
+      );
+      if (compare_new)
+        throw new Error("Password already used, so choose new one");
       const salt = bcrypt.genSaltSync(10);
       const hashPassword = bcrypt.hashSync(payload.new_password, salt);
       const data = {
-        password: hashPassword
-      }
-      const updated = await UserRepo.updateUser(data, user_id)
-      return updated
+        password: hashPassword,
+      };
+      const updated = await UserRepo.updateUser(data, user_id);
+      return updated;
     }
-
-  }
+  };
   //update user
   updateUser = async (id, payload, token) => {
     if (payload.password) {
@@ -153,17 +162,21 @@ class UserService {
     const email = payload.email;
     const FoundUser = await UserRepo.findByEmail(email);
     if (!FoundUser) throw new Error("User by this email not found!");
-    const check_password = bcrypt.compareSync(payload.password, FoundUser.password);
-    if (check_password) throw new Error("Same as previous, please use a new password!!")
+    const check_password = bcrypt.compareSync(
+      payload.password,
+      FoundUser.password
+    );
+    if (check_password)
+      throw new Error("Same as previous, please use a new password!!");
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(payload.password, salt);
     const data = {
-      password: hashPassword
-    }
+      password: hashPassword,
+    };
     const UpdatePassword = await UserRepo.updateByEmail(data, email);
-    if (!UpdatePassword) throw new Error("Password not updated")
+    if (!UpdatePassword) throw new Error("Password not updated");
     return true;
-  }
+  };
   // find by email
   findByEmail = async (email) => {
     const UserByEmail = await UserRepo.findByEmail(email);
@@ -172,9 +185,9 @@ class UserService {
       full_name: UserByEmail.full_name,
       phone_no: UserByEmail.phone_no,
       email: UserByEmail.email,
-    }
+    };
     return user;
-  }
+  };
   // sendEmail
   sendEmail = async (email) => {
     const UserByEmail = await UserRepo.findByEmail(email);
@@ -182,20 +195,25 @@ class UserService {
     // hashing Email
     const salt = bcrypt.genSaltSync(10);
     const hashEmail = bcrypt.hashSync(UserByEmail.email, salt);
-    const URL = `https://canteen-management-system-abik.herokuapp.com/changePassword?email=${email}&code=${hashEmail}`
+    const URL = `${process.env.DEPLOY_URL}/changePassword?email=${email}&code=${hashEmail}`;
     const VerificationData = {
       email: UserByEmail.email,
-      token: hashEmail
-    }
-    const AddVerificationData = await Email_VerificationService.add(VerificationData);
-    if (!AddVerificationData) throw new Error("You cannot change because your data not saved, so reload the login place and try again")
+      token: hashEmail,
+    };
+    const AddVerificationData = await Email_VerificationService.add(
+      VerificationData
+    );
+    if (!AddVerificationData)
+      throw new Error(
+        "You cannot change because your data not saved, so reload the login place and try again"
+      );
     let seMail = await this.SENDMAIL(email, URL);
     if (seMail) {
       return true;
     } else {
       return false;
     }
-  }
+  };
   // send = async (transporter, email, URL) => {
   //   let info = await transporter.sendMail({
   //     from: process.env.EMAIL, // sender address
@@ -224,21 +242,21 @@ class UserService {
   };
   findByRoleId = async (id) => {
     const findAssignedRoles = await UserRoleRepo.findByRoleId(id);
-    const Users = []
+    const Users = [];
     for (let i = 0; i < findAssignedRoles.length; i++) {
       const UserRoles = findAssignedRoles[i];
       const findUser = await UserRepo.findById(UserRoles.user_id);
       Users.push(findUser);
     }
     const Total_Users = Users.length;
-    return { Users, Total_Users }
-  }
+    return { Users, Total_Users };
+  };
   //find student by id
   findById = async (id) => {
     let userData = await UserRepo.findById(id);
-    if (!userData) throw new Error("User not registered")
+    if (!userData) throw new Error("User not registered");
     const _Role = await RoleRepository.findById(userData.user_role.role_id);
-    if (!_Role) throw new Error("Sorry, No roles are assigned for you!!")
+    if (!_Role) throw new Error("Sorry, No roles are assigned for you!!");
     const ReturnData = {
       id: userData.id,
       full_name: userData.full_name,
@@ -247,8 +265,8 @@ class UserService {
       phone_no: userData.phone_no,
       address: userData.address,
       role_id: _Role.role_id,
-      role_name: _Role.role_name
-    }
+      role_name: _Role.role_name,
+    };
 
     return ReturnData;
   };

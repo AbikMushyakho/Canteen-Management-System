@@ -283,16 +283,16 @@ function EsewaPay() {
 
     var path = "https://uat.esewa.com.np/epay/main";
     var params = {
-        pid: `${Date.now()}`,
-        amt: total_bills,
-        psc: 0,
-        pdc: 0,
-        txAmt: 0,
-        tAmt: total_bills,
-        scd: "EPAYTEST",
-        su: "https://canteen-management-system-abik.herokuapp.com/payment_success",
-        fu: "https://canteen-management-system-abik.herokuapp.com/payment_failure"
-    }
+      pid: `${Date.now()}`,
+      amt: total_bills,
+      psc: 0,
+      pdc: 0,
+      txAmt: 0,
+      tAmt: total_bills,
+      scd: "EPAYTEST",
+      su: "https://canteen.abik.com.np/payment_success",
+      fu: "https://canteen.abik.com.np/payment_failure",
+    };
     var form = document.createElement("form");
     form.setAttribute("method", "POST");
     form.setAttribute('id', "esewa_form")
